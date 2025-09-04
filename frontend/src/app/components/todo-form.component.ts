@@ -1,7 +1,7 @@
 import { Component, signal, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TodoService } from '../services/todo.service';
+import { TodoDemoService } from '../services/todo-demo.service';
 import { TodoCategory } from '../models/todo.model';
 
 @Component({
@@ -192,7 +192,7 @@ export class TodoFormComponent {
 
   itemAdded = output<void>();
 
-  constructor(protected todoService: TodoService) {}
+  constructor(protected todoService: TodoDemoService) {}
 
   async onSubmit(): Promise<void> {
     const titleValue = this.title.trim();

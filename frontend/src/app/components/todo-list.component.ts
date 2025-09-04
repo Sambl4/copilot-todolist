@@ -1,6 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TodoService } from '../services/todo.service';
+import { TodoDemoService } from '../services/todo-demo.service';
 import { TodoItemComponent } from './todo-item.component';
 import { TodoFormComponent } from './todo-form.component';
 import { TodoCategory } from '../models/todo.model';
@@ -584,7 +584,7 @@ export class TodoListComponent {
       })
   );
 
-  constructor(protected todoService: TodoService) {}
+  constructor(protected todoService: TodoDemoService) {}
 
   openModal(): void {
     this.modalSignal.set(true);

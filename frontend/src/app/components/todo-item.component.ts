@@ -1,7 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Todo } from '../models/todo.model';
-import { TodoService } from '../services/todo.service';
+import { TodoDemoService } from '../services/todo-demo.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -247,7 +247,7 @@ export class TodoItemComponent {
     });
   });
 
-  constructor(protected todoService: TodoService) {}
+  constructor(protected todoService: TodoDemoService) {}
 
   async toggleCompleted(): Promise<void> {
     await this.todoService.toggleTodo(this.todo().id);
