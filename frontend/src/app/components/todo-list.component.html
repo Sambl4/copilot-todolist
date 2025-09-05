@@ -1,0 +1,109 @@
+<div class="kanban-board">
+  <div class="board-header">
+    <h2>Retrospective Board</h2>
+    <div class="todo-stats">
+      <span class="stat">
+        Total: {{ todoService.todos().length }}
+      </span>
+      <span class="stat">
+        Completed: {{ completedCount() }}
+      </span>
+    </div>
+  </div>
+
+  @if (todoService.loading()) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <span>Loading retrospective items...</span>
+    </div>
+  }
+
+  @if (todoService.error()) {
+    <div class="error-message">
+      <strong>Error:</strong> {{ todoService.error() }}
+      <button (click)="retryLoad()" class="btn-retry">Retry</button>
+    </div>
+  }
+
+  @if (!todoService.loading() && todoService.todos().length === 0) {
+    <div class="empty-state">
+      <h4>No retrospective items yet!</h4>
+      <p>Add your first retrospective item using the form above.</p>
+    </div>
+  }
+
+  @if (todoService.todos().length > 0) {
+    <div class="kanban-columns">
+      <!-- Start Doing Column -->
+      <div class="kanban-column start-doing">
+        <div class="column-header">
+          <h3>What should we start doing?</h3>
+          <span class="item-count">{{ startDoingTodos().length }}</span>
+        </div>
+        <div class="column-content">
+          @for (todo of startDoingTodos(); track todo.id) {
+            <app-todo-item [todo]="todo" />
+          } @empty {
+            <div class="empty-column">
+              <p>No items yet</p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Do Differently Column -->
+      <div class="kanban-column do-differently">
+        <div class="column-header">
+          <h3>What should we do differently?</h3>
+          <span class="item-count">{{ doDifferentlyTodos().length }}</span>
+        </div>
+        <div class="column-content">
+          @for (todo of doDifferentlyTodos(); track todo.id) {
+            <app-todo-item [todo]="todo" />
+          } @empty {
+            <div class="empty-column">
+              <p>No items yet</p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Keep Doing Column -->
+      <div class="kanban-column keep-doing">
+        <div class="column-header">
+          <h3>What should we keep doing?</h3>
+          <span class="item-count">{{ keepDoingTodos().length }}</span>
+        </div>
+        <div class="column-content">
+          @for (todo of keepDoingTodos(); track todo.id) {
+            <app-todo-item [todo]="todo" />
+          } @empty {
+            <div class="empty-column">
+              <p>No items yet</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Floating Action Button -->
+  <button class="fab" (click)="openModal()" title="Add new retrospective item">
+    <span class="fab-icon">+</span>
+  </button>
+
+  <!-- Modal Dialog -->
+  @if (showModal()) {
+    <div class="modal-overlay" (click)="closeModal()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>Add Retrospective Item</h2>
+          <button class="close-btn" (click)="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <app-todo-form (itemAdded)="onItemAdded()" />
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -6,41 +6,7 @@ import { TodoDemoService } from '../services/todo-demo.service';
 @Component({
   selector: 'app-todo-item',
   imports: [CommonModule],
-  template: `
-    <div class="retrospective-card" [class.completed]="todo().completed">
-      <div class="card-content">
-        <h4 class="card-title">{{ todo().title }}</h4>
-        
-        @if (todo().description) {
-          <p class="card-description">{{ todo().description }}</p>
-        }
-        
-        <div class="card-footer">
-          <span class="card-date">{{ formattedDate() }}</span>
-          <div class="card-actions">
-            <button
-              (click)="toggleCompleted()"
-              [disabled]="todoService.loading()"
-              class="btn-toggle"
-              [class.completed]="todo().completed"
-              [title]="todo().completed ? 'Mark as incomplete' : 'Mark as complete'"
-            >
-              {{ todo().completed ? '✓' : '○' }}
-            </button>
-            
-            <button
-              (click)="deleteTodo()"
-              [disabled]="todoService.loading()"
-              class="btn-delete"
-              title="Delete item"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl: './todo-item.component.html',
   styles: [`
     .retrospective-card {
       background: white;

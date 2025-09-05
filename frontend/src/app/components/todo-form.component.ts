@@ -7,71 +7,7 @@ import { TodoCategory } from '../models/todo.model';
 @Component({
   selector: 'app-todo-form',
   imports: [CommonModule, FormsModule],
-  template: `
-    <div class="retro-form">
-      <form (ngSubmit)="onSubmit()" #todoForm="ngForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="category">Category*</label>
-            <select
-              id="category"
-              name="category"
-              [(ngModel)]="category"
-              required
-              class="form-control"
-            >
-              <option value="">Select category...</option>
-              <option value="start-doing">💡 Start Doing</option>
-              <option value="do-differently">🔄 Do Differently</option>
-              <option value="keep-doing">✅ Keep Doing</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="title">Title*</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              [(ngModel)]="title"
-              required
-              placeholder="What should the team focus on?"
-              class="form-control"
-            />
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            [(ngModel)]="description"
-            placeholder="Add more details about this retrospective item..."
-            class="form-control"
-            rows="2"
-          ></textarea>
-        </div>
-        
-        <div class="form-actions">
-          <button 
-            type="submit" 
-            [disabled]="!todoForm.form.valid || todoService.loading()"
-            class="btn-primary"
-          >
-            {{ todoService.loading() ? 'Adding...' : 'Add Item' }}
-          </button>
-          <button 
-            type="button" 
-            (click)="onReset()"
-            class="btn-secondary"
-          >
-            Reset
-          </button>
-        </div>
-      </form>
-    </div>
-  `,
+  templateUrl: './todo-form.component.html',
   styles: [`
     .retro-form {
       background: transparent;
